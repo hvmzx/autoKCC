@@ -3,7 +3,7 @@ from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
 path="mangas"
-print('Watching for folder ' + mangas + ' for new mangas')
+print('Watching for folder ' + path + ' for new mangas')
 
 class MyHandler(PatternMatchingEventHandler):
     def on_created(self, event):
