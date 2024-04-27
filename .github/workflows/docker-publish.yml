@@ -19,26 +19,35 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      
-      - name: Prune
-        uses: smartsquaregmbh/delete-old-packages@v0.7.0
+      - name: Delete untagged ghcr
+        uses: Chizkiyahu/delete-untagged-ghcr-action@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
-          user: hvmzx
-          type: container
-          version-pattern: "^\\d+\\.\\d+\\.\\d+-RC\\d+$" # The regex needs to be escaped!
-          names: |
-            autokcc
-      - name: Prune2
-        uses: smartsquaregmbh/delete-old-packages@v0.7.0
-        with:
-          token: ${{ secrets.GH_TOKEN }}
-          user: hvmzx
-          type: docker
-          names: |
-            autokcc
+          # Repository name or  name with owner
+          # Delete only from repository name
+          # Default: ${{ github.repository }}
+          repository: ''
+          # 'The repository owner name'
+          # Default: ${{ github.repository_owner }}
+          repository_owner: ''
+          # 'The package names'
+          # Delete only from comma separated package names
+          # required: false
+          package_name: 'autokcc'
+          # Delete only package versions without tag
+          # required: false
+          # Default: true
+          # choices: true, false
+          untagged_only: false
+          # Except untagged multiplatform packages from deletion
+          # only for untagged_only=true
+          # needs docker installed
+          except_untagged_multiplatform: false
+          # the owner type
+          # required: true
+          # choices: org, user
+          owner_type: 'user'
+
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
