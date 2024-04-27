@@ -19,14 +19,8 @@ jobs:
       packages: write
 
     steps:
-      - name: Delete all owner containers
-        uses: Chizkiyahu/delete-untagged-ghcr-action@v3
-        with:
-            token: ${{ secrets.GH_TOKEN }}
-            repository_owner: ${{ github.repository_owner }}
-            untagged_only: false
-            owner_type: user # or user
-
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
@@ -44,6 +38,11 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
           # In this example GHCR_TOKEN has the packages:delete permission
+      - uses: mitchfen/cleanup-untagged-container-images@v1.0.2
+        with:
+          username: 'mitchfen'
+          container-name: 'mitchfen.xyz'
+          token: ${{ secrets.GHCR_TOKEN }}
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
