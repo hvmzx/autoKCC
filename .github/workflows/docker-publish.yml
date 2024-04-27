@@ -20,11 +20,14 @@ jobs:
 
     steps:
 
-      - uses: chipkent/action-cleanup-package@v1.0.1
+      - uses: peterstolz/containercrop@v1.0.2
         with:
-          package-name: autokcc
-          tag: .*
-          github-token: ${{ secrets.GH_TOKEN }}
+          image-name: 'autoKCC/autokcc'
+          cut-off: '30 days ago UTC'
+          token: ${{ secrets.GH_TOKEN }}
+          untagged-only: 'true'
+          keep-at-least: '5'
+          dry-run: 'true'
 
       - name: Checkout repository
         uses: actions/checkout@v4
