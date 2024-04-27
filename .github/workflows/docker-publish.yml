@@ -19,34 +19,13 @@ jobs:
       packages: write
 
     steps:
-      - name: Delete untagged ghcr
+      - name: Delete all owner containers
         uses: Chizkiyahu/delete-untagged-ghcr-action@v3
         with:
-          token: ${{ secrets.GH_TOKEN }}
-          # Repository name or  name with owner
-          # Delete only from repository name
-          # Default: ${{ github.repository }}
-          repository: ''
-          # 'The repository owner name'
-          # Default: ${{ github.repository_owner }}
-          repository_owner: ''
-          # 'The package names'
-          # Delete only from comma separated package names
-          # required: false
-          package_name: 'autokcc'
-          # Delete only package versions without tag
-          # required: false
-          # Default: true
-          # choices: true, false
-          untagged_only: false
-          # Except untagged multiplatform packages from deletion
-          # only for untagged_only=true
-          # needs docker installed
-          except_untagged_multiplatform: false
-          # the owner type
-          # required: true
-          # choices: org, user
-          owner_type: 'user'
+            token: ${{ secrets.GH_TOKEN }}
+            repository_owner: ${{ github.repository_owner }}
+            untagged_only: false
+            owner_type: user # or user
 
 
       # Login against a Docker registry except on PR
