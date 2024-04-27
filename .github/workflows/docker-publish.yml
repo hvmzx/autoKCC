@@ -25,9 +25,9 @@ jobs:
       - name: Prune
         uses: vlaurin/action-ghcr-prune@v0.6.0
         with:
-          token: ${{ secrets.YOUR_TOKEN }}
-          organization: your-org
-          container: your-container
+          token: ${{ secrets.GH_TOKEN }}
+          organization: hvmzx
+          container: autokcc
           dry-run: true # Dry-run first, then change to `false`
           keep-younger-than: 7 # days
           keep-last: 1
