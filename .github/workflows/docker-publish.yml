@@ -19,15 +19,15 @@ jobs:
       packages: write
 
     steps:
+
+      - uses: chipkent/action-cleanup-package@v1.0.1
+        with:
+          package-name: autokcc
+          tag: .*
+          github-token: ${{ secrets.GH_TOKEN }}
+
       - name: Checkout repository
         uses: actions/checkout@v4
-      
-      - name: Prune
-        uses: mitchfen/cleanup-untagged-container-images@v1.0.2
-        with:
-          username: 'hvmzx'
-          container-name: 'autokcc'
-          token: ${{ secrets.GH_TOKEN }}
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
@@ -38,6 +38,7 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GH_TOKEN }}
+
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5.5.1
