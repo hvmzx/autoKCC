@@ -23,11 +23,22 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Prune
-        uses: mitchfen/cleanup-untagged-container-images@v1.0.2
+        uses: smartsquaregmbh/delete-old-packages@v0.7.0
         with:
-          username: 'hvmzx'
-          container-name: 'autokcc'
           token: ${{ secrets.GH_TOKEN }}
+          user: hvmzx
+          type: container
+          version-pattern: "^\\d+\\.\\d+\\.\\d+-RC\\d+$" # The regex needs to be escaped!
+          names: |
+            .*
+      - name: Prune2
+        uses: smartsquaregmbh/delete-old-packages@v0.7.0
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          user: hvmzx
+          type: docker
+          names: |
+            .*
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
