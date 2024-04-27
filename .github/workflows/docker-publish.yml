@@ -30,7 +30,7 @@ jobs:
           type: container
           version-pattern: "^\\d+\\.\\d+\\.\\d+-RC\\d+$" # The regex needs to be escaped!
           names: |
-            .*
+            autokcc
       - name: Prune2
         uses: smartsquaregmbh/delete-old-packages@v0.7.0
         with:
@@ -38,7 +38,7 @@ jobs:
           user: hvmzx
           type: docker
           names: |
-            .*
+            autokcc
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
