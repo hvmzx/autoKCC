@@ -33,6 +33,7 @@ autokcc:
 
 ## Requirements :
 
+- Ebook name must be following the following format to correctly set the metadata in the ebook : "AUTHOR NAME - SERIES - CHAPTER" (ex: Oda Eiichiro - One Piece - Chapter 1052 New Morning)
 - FOLDER1 and FOLDER2 need to be replaced with the folders to mount, respectively matching the folder to monitor and the folder where the processed files will be moved to (both folders can be identical if you do not want to use another folder).
 - OPTIONS='' needs to be filled with the kcc options, documentation [here](https://github.com/ciromattia/kcc?tab=readme-ov-file#standalone-kcc-c2epy-usage). DO NOT add the -o option, it is already included and handled with the volume mounting strategy.
 
